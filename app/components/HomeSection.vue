@@ -1,14 +1,24 @@
 <template>
-  <div class="flex flex-col items-center text-center min-h-[60vh] justify-center">
-    <div class="relative group mb-8">
-      <div class="absolute -inset-2 bg-gradient-to-tr from-red-600 to-slate-600 rounded-full blur-xl opacity-40 group-hover:opacity-60 transition duration-1000"></div>
-      <img src="/me.jpg" alt="پروفایل" class="relative w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-4 border-white/80 shadow-2xl" />
+  <div class="flex flex-col items-center justify-center min-h-[70vh] text-center px-4">
+    <div class="relative group mb-10">
+      <div class="absolute -inset-1 bg-gradient-to-r from-red-500 to-blue-500 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000 animate-tilt"></div>
+      <img src="/me.jpg" class="relative w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-white shadow-2xl object-cover" alt="Profile">
+      <div class="absolute bottom-2 right-2 bg-white p-2 rounded-full shadow-lg text-2xl">🛠️</div>
     </div>
-    <h1 class="text-4xl md:text-7xl font-black text-slate-800 mb-4 tracking-tighter">
-      بهزاد حیدری
+
+    <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-4 tracking-tight">
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-900">بهزاد حیدری</span>
     </h1>
-    <p class="text-xl md:text-2xl text-slate-600 font-light">
-      تلفیق <span class="text-red-600 font-bold">صنعت</span> و <span class="text-blue-600 font-bold">تکنولوژی</span>
+    
+    <div class="flex flex-wrap justify-center gap-3 mb-8">
+      <span class="px-4 py-1 rounded-full bg-red-50 text-red-600 font-bold text-sm border border-red-100">نمایندگی هیلتی</span>
+      <span class="px-4 py-1 rounded-full bg-blue-50 text-blue-600 font-bold text-sm border border-blue-100">بنیان‌گذار استارتاپ</span>
+      <span class="px-4 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-sm border border-slate-200">نویسنده</span>
+    </div>
+
+    <p class="text-xl text-slate-500 max-w-2xl leading-relaxed">
+      تلفیق قدرت ابزارآلات صنعتی با نوآوری دنیای دیجیتال. 
+      <br>ما اینجا هستیم تا استانداردهای جدیدی تعریف کنیم.
     </p>
   </div>
 </template>
