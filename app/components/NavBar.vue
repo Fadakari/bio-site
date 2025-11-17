@@ -69,17 +69,30 @@
           </button>
         </div>
 
-        <div class="flex-1 flex flex-col gap-2 p-6 overflow-y-auto">
+        <div class="flex-1 flex flex-col gap-3 p-6 overflow-y-auto">
           <button v-for="(tab, i) in tabs" 
                   :key="tab.id"
                   @click="selectMobile(tab.id)"
-                  class="flex items-center gap-4 p-4 rounded-2xl text-lg font-bold transition-all border-none outline-none animate-fade-in-up"
-                  :class="active === tab.id ? 'bg-slate-900 text-white shadow-lg shadow-slate-900/20' : 'bg-slate-50 text-slate-600 hover:bg-white hover:shadow-md'"
-                  :style="{ animationDelay: `${i * 50}ms` }"
+                  class="group relative w-full p-4 rounded-2xl flex items-center gap-4 transition-all duration-300 border-2 active:scale-95 overflow-hidden isolate animate-slide-in-right opacity-0"
+                  :class="active === tab.id 
+                    ? 'bg-red-700 border-red-700 text-white shadow-xl shadow-red-700/30' 
+                    : 'bg-white border-slate-100 text-slate-600 hover:border-red-200 hover:bg-red-50/50'"
+                  :style="{ animationDelay: `${i * 100}ms` }"
           >
-            <span class="text-2xl opacity-80">{{ tab.icon }}</span>
-            {{ tab.label }}
-            <span v-if="active === tab.id" class="mr-auto w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+            <div v-if="active === tab.id" class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent opacity-30 -skew-x-12 translate-x-[-100%] animate-shine"></div>
+
+            <span class="text-2xl transition-transform duration-300 group-hover:scale-110"
+                  :class="active === tab.id ? 'opacity-100' : 'opacity-70 grayscale group-hover:grayscale-0'">
+              {{ tab.icon }}
+            </span>
+            
+            <span class="text-lg font-bold tracking-wide">{{ tab.label }}</span>
+            
+            <span v-if="active !== tab.id" class="mr-auto text-slate-300 group-hover:text-red-400 group-hover:-translate-x-1 transition-all">
+              ←
+            </span>
+            
+            <span v-if="active === tab.id" class="mr-auto w-2.5 h-2.5 bg-white rounded-full shadow-lg shadow-white/50 animate-pulse"></span>
           </button>
         </div>
 
@@ -144,11 +157,32 @@ onUnmounted(() => {
 }
 
 /* انیمیشن آیتم‌های موبایل */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50px); /* شروع از سمت راست */
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
 }
 
+.animate-slide-in-right {
+  animation: slideInRight 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* انیمیشن درخشش برای دکمه فعال (حس خفن بودن) */
+@keyframes shine {
+  0% { transform: translateX(150%) skewX(-12deg); }
+  100% { transform: translateX(-250%) skewX(-12deg); }
+}
+
+.animate-shine {
+  animation: shine 3s infinite ease-in-out;
+}
 .animate-fade-in-up {
   animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0; /* شروع با مخفی بودن */

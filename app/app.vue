@@ -66,7 +66,7 @@ const leaveAnimation = (el, done) => {
 </script>
 
 <template>
-  <div class="app-container text-slate-800 font-sans overflow-hidden min-h-screen flex flex-col">
+  <div class="app-container text-slate-800 font-sans overflow-hidden min-h-screen flex flex-col px-5">
     
     <AnimatedGradientBackground />
     
