@@ -8,23 +8,42 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { gsap } from 'gsap';
 
-onMounted(() => {
-  const blobs = gsap.utils.toArray(".blob");
+let ctx;
 
-  blobs.forEach((blob) => {
-    gsap.to(blob, {
-      x: "random(-100, 100)",
-      y: "random(-100, 100)",
-      scale: "random(0.8, 1.2)",
-      duration: "random(10, 20)",
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+onMounted(() => {
+  ctx = gsap.context(() => {
+    const blobs = gsap.utils.toArray(".blob");
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+
+    function moveBlob(blob) {
+      gsap.to(blob, {
+
+
+        x: gsap.utils.random(-width / 2, width / 2),
+        y: gsap.utils.random(-height / 2, height / 2),
+        
+
+        scale: gsap.utils.random(0.5, 1),
+        
+        duration: gsap.utils.random(1, 7),
+        ease: "sine.inOut",
+        
+
+        onComplete: () => moveBlob(blob)
+      });
+    }
+
+    blobs.forEach(blob => moveBlob(blob));
   });
+});
+
+onUnmounted(() => {
+  ctx && ctx.revert();
 });
 </script>
 
@@ -41,10 +60,10 @@ onMounted(() => {
 }
 
 .gradients-container {
-  filter: blur(60px);
+  filter: blur(70px);
   width: 100%;
   height: 100%;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .blob {
@@ -52,33 +71,33 @@ onMounted(() => {
   border-radius: 50%;
   opacity: 0.7;
   mix-blend-mode: multiply;
+  
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
+
 .color-1 {
-  width: 50vw;
-  height: 50vw;
+  width: 60vw;
+  height: 60vw;
   background: #d2051e;
-  top: -10%;
-  left: -10%;
-  opacity: 0.15;
+  opacity: 0.25;
 }
 
 .color-2 {
-  width: 40vw;
-  height: 40vw;
-  background: #94a3b8;
-  bottom: -10%;
-  right: -10%;
-  opacity: 0.2;
+  width: 50vw;
+  height: 50vw;
+  background: #3872c4;
+  opacity: 0.3;
 }
 
 .color-3 {
-  width: 30vw;
-  height: 30vw;
-  background: #cbd5e1;
-  top: 40%;
-  left: 40%;
-  opacity: 0.3;
+  width: 40vw;
+  height: 40vw;
+  background: #8d0e0e;
+  opacity: 0.4;
 }
 
 .noise-overlay {

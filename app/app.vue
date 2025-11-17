@@ -5,7 +5,7 @@
   <div class="main-container font-sans text-slate-800">
     <AnimatedGradientBackground />
 
-    <main class="relative z-10 container mx-auto px-4 py-8 max-w-4xl">
+    <main class="relative z-10 mx-auto px-4 py-8 max-w-4xl">
       
       <header class="flex flex-col items-center text-center mt-10 mb-16 animate-fade-in">
         <div class="relative group">
@@ -80,7 +80,7 @@
 <style>
 .card {
   background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(7px);
   border: 1px solid rgba(0,0,0,0.05);
   border-radius: 1.5rem;
   padding: 1.5rem;
