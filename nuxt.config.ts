@@ -4,11 +4,11 @@ export default defineNuxtConfig({
 
   modules: ['@unocss/nuxt'],
 
-  css: ['~/assets/styles/main.css'],
+  css: ['./assets/styles/main.css'],
 
   app: {
     head: {
-      title: 'Erfan Fadakar | Industrial & Tech Portfolio',
+      title: 'Behzad Heydari | Industrial & Tech Portfolio',
       meta: [
         { name: 'description', content: 'نمایندگی هیلتی، نویسنده و بنیان‌گذار استارتاپ' }
       ]
