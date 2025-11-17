@@ -1,3 +1,6 @@
+<script setup>
+  import '../assets/styles/main.css'
+</script>
 <template>
   <div class="main-container font-sans text-slate-800">
     <AnimatedGradientBackground />
@@ -15,7 +18,7 @@
         </div>
         
         <h1 class="text-3xl md:text-5xl font-black mt-6 mb-2 tracking-tight">
-          عرفان فداکار
+          بهزاد حیدری
         </h1>
         <p class="text-lg md:text-xl text-gray-600 font-medium">
           <span class="text-red-600">تعمیرات تخصصی هیلتی</span> | نویسنده | توسعه‌دهنده وب
