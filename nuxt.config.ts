@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 
   modules: ['@unocss/nuxt'],
 
-  css: ['./assets/styles/main.css'],
+  css: ['~/assets/styles/main.css'],
 
   app: {
     head: {
