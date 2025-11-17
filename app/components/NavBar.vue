@@ -1,88 +1,94 @@
 <template>
-  <nav class="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 py-6 transition-all duration-500"
-       :class="{ 'py-3': isScrolled }">
-    
-    <div class="relative flex items-center p-1.5 rounded-full border border-white/40 shadow-2xl shadow-slate-200/40 backdrop-blur-2xl bg-white/60 transition-all duration-500 ease-out"
-         :class="isMobile ? 'w-full justify-between px-4 py-2' : 'gap-2 pr-2'">
-
-      <div class="flex items-center gap-2 pl-4 pr-2 cursor-pointer group select-none" @click="$emit('change', 'home')">
-        <div class="relative flex h-3 w-3">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600 group-hover:scale-125 transition-transform"></span>
+  <header 
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-4 md:px-8"
+    :class="isScrolled ? 'py-3 bg-white/70 backdrop-blur-xl shadow-sm' : 'py-6 bg-transparent'"
+  >
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <div class="flex items-center gap-2 cursor-pointer select-none group" @click="$emit('change', 'home')">
+        <div class="relative w-10 h-10 flex items-center justify-center bg-slate-900 rounded-xl text-white overflow-hidden transition-transform duration-300 group-hover:rotate-3 group-hover:scale-105 shadow-lg shadow-slate-900/20">
+          <span class="font-black text-xl relative z-10">B</span>
+          <div class="absolute inset-0 bg-gradient-to-tr from-slate-800 to-slate-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         </div>
-        <span class="font-black text-lg tracking-tighter text-slate-800 group-hover:text-red-600 transition-colors">
-          BEHZAD
-        </span>
+        <div class="flex flex-col">
+          <span class="font-bold text-slate-900 text-lg leading-none tracking-tight">BEHZAD</span>
+          <span class="text-[10px] text-slate-500 font-medium tracking-widest uppercase mt-0.5">Portfolio</span>
+        </div>
       </div>
 
-      <div v-if="!isMobile" class="flex items-center bg-slate-100/40 rounded-full p-1.5 border border-white/40 backdrop-blur-sm">
-        <button 
-          v-for="tab in tabs" 
-          :key="tab.id"
-          @click="$emit('change', tab.id)"
-          class="relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-500 overflow-hidden group"
-          :class="active === tab.id ? 'text-red-700 shadow-sm' : 'text-slate-500 hover:text-slate-900'"
-        >
-          <span class="relative z-10 flex items-center gap-2 transition-transform duration-300 group-active:scale-95">
-            {{ tab.label }}
-          </span>
-          
-          <div v-if="active === tab.id" 
-               class="absolute inset-0 rounded-full transition-all duration-300
-                      bg-gradient-to-b from-white/80 to-white/10
-                      backdrop-blur-2xl
-                      border border-white/90
-                      shadow-[inset_0_2px_4px_rgba(255,255,255,1),0_4px_15px_rgba(220,38,38,0.25)]"
-               style="view-transition-name: active-tab-bg">
-               
-               <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent -skew-x-12 translate-x-[-100%] animate-shine"></div>
-          </div>
-        </button>
+      <div v-if="!isMobile" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div class="flex p-1.5 bg-slate-100/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-inner">
+          <button 
+            v-for="tab in tabs" 
+            :key="tab.id"
+            @click="$emit('change', tab.id)"
+            class="relative px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ease-out outline-none border-none focus:outline-none focus:ring-0 overflow-hidden"
+            :class="active === tab.id ? 'text-slate-900 shadow-md shadow-slate-200 transform scale-100' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200/50'"
+          >
+            <div v-if="active === tab.id" class="absolute inset-0 bg-white rounded-xl z-0" style="view-transition-name: active-tab;"></div>
+            
+            <span class="relative z-10 flex items-center gap-2">
+              <span>{{ tab.icon }}</span>
+              {{ tab.label }}
+            </span>
+          </button>
+        </div>
       </div>
 
-      <button v-else 
-              @click="mobileMenuOpen = true" 
-              class="p-2 rounded-full text-slate-700 hover:bg-white/50 transition-colors active:scale-90">
-        <div class="flex flex-col gap-1.5 w-6 items-end">
-          <span class="w-full h-0.5 bg-slate-800 rounded-full"></span>
-          <span class="w-2/3 h-0.5 bg-slate-800 rounded-full group-hover:w-full transition-all"></span>
-          <span class="w-full h-0.5 bg-slate-800 rounded-full"></span>
-        </div>
-      </button>
-    </div>
+      <div class="flex items-center gap-3">
+        <a href="tel:09120000000" 
+           class="hidden md:flex items-center gap-2 bg-slate-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-red-600 hover:shadow-red-500/30 hover:-translate-y-0.5 transition-all duration-300 shadow-lg shadow-slate-900/20 border-none outline-none">
+           <span>تماس بگیرید</span>
+           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+           </svg>
+        </a>
 
-    <Transition name="menu-fade">
-      <div v-if="isMobile && mobileMenuOpen" 
-           class="fixed inset-0 z-[60] bg-white/80 backdrop-blur-3xl flex flex-col items-center justify-center overflow-hidden"
-           @click.self="closeMobileMenu">
-        
-        <button class="absolute top-6 right-6 p-4 rounded-full bg-white/50 text-slate-500 hover:text-red-600 hover:bg-red-50 transition-all duration-300 hover:rotate-90 shadow-sm border border-white/60"
-                @click="closeMobileMenu">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        <button v-if="isMobile" 
+                @click="mobileMenuOpen = true" 
+                class="p-2.5 rounded-xl bg-white text-slate-900 shadow-md shadow-slate-100 active:scale-90 transition-all border-none outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
+      </div>
 
-        <div class="flex flex-col gap-5 w-full px-8 items-center max-w-sm">
-          <TransitionGroup name="stagger-list" tag="div" class="w-full flex flex-col gap-4" appear>
-            <button v-for="(tab, index) in tabs" 
-                    :key="tab.id" 
-                    @click="selectMobile(tab.id)"
-                    class="w-full py-5 text-2xl font-black tracking-tight rounded-3xl transition-all duration-300 group border border-transparent relative overflow-hidden backdrop-blur-sm"
-                    :class="active === tab.id 
-                      ? 'bg-red-50/80 text-red-600 shadow-lg shadow-red-500/10 border-red-100 scale-105' 
-                      : 'hover:bg-white/40 text-slate-400 hover:text-slate-800'"
-                    :style="{ transitionDelay: `${index * 80}ms` }">
-              
-              <span class="relative z-10">{{ tab.label }}</span>
-              
-              <span v-if="active === tab.id" class="absolute left-6 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-red-500"></span>
-            </button>
-          </TransitionGroup>
+    </div>
+
+    <Transition name="mobile-menu">
+      <div v-if="isMobile && mobileMenuOpen" 
+           class="fixed inset-0 z-[100] bg-white flex flex-col"
+           @click.self="mobileMenuOpen = false">
+        
+        <div class="flex items-center justify-between p-6 border-b border-slate-100">
+          <span class="font-black text-2xl text-slate-900">منو</span>
+          <button @click="mobileMenuOpen = false" class="p-2 rounded-full bg-slate-50 hover:bg-red-50 text-slate-500 hover:text-red-500 transition-colors border-none outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex-1 flex flex-col gap-2 p-6 overflow-y-auto">
+          <button v-for="(tab, i) in tabs" 
+                  :key="tab.id"
+                  @click="selectMobile(tab.id)"
+                  class="flex items-center gap-4 p-4 rounded-2xl text-lg font-bold transition-all border-none outline-none animate-fade-in-up"
+                  :class="active === tab.id ? 'bg-slate-900 text-white shadow-lg shadow-slate-900/20' : 'bg-slate-50 text-slate-600 hover:bg-white hover:shadow-md'"
+                  :style="{ animationDelay: `${i * 50}ms` }"
+          >
+            <span class="text-2xl opacity-80">{{ tab.icon }}</span>
+            {{ tab.label }}
+            <span v-if="active === tab.id" class="mr-auto w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+          </button>
+        </div>
+
+        <div class="p-6 bg-slate-50">
+          <p class="text-center text-slate-400 text-sm">© 2024 Behzad Heydari</p>
         </div>
       </div>
     </Transition>
-  </nav>
+  </header>
 </template>
 
 <script setup>
@@ -92,9 +98,9 @@ defineProps(['active']);
 const emit = defineEmits(['change']);
 
 const tabs = [
-  { id: 'home', label: 'معرفی' },
-  { id: 'services', label: 'خدمات' },
-  { id: 'contact', label: 'تماس' }
+  { id: 'home', label: 'خانه', icon: '🏠' },
+  { id: 'services', label: 'خدمات من', icon: '⚡' },
+  { id: 'contact', label: 'ارتباط', icon: '📞' }
 ];
 
 const isMobile = ref(false);
@@ -105,10 +111,6 @@ const checkScreen = () => { isMobile.value = window.innerWidth < 768; };
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20;
-};
-
-const closeMobileMenu = () => {
-  mobileMenuOpen.value = false;
 };
 
 const selectMobile = (id) => {
@@ -129,41 +131,26 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.menu-fade-enter-active,
-.menu-fade-leave-active {
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), backdrop-filter 0.4s ease;
+/* انیمیشن ورود منوی موبایل */
+.mobile-menu-enter-active,
+.mobile-menu-leave-active {
+  transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.menu-fade-enter-from,
-.menu-fade-leave-to {
+.mobile-menu-enter-from,
+.mobile-menu-leave-to {
   opacity: 0;
-  backdrop-filter: blur(0px);
+  transform: translateX(100%);
 }
 
-.stagger-list-enter-active {
-  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+/* انیمیشن آیتم‌های موبایل */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.stagger-list-leave-active {
-  transition: all 0.3s ease;
-}
-
-.stagger-list-enter-from {
-  opacity: 0;
-  transform: translateY(30px) scale(0.9);
-}
-
-.stagger-list-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
-}
-.animate-shine {
-  animation: shine 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes shine {
-  0% { transform: translateX(-150%) skewX(-12deg); }
-  20% { transform: translateX(150%) skewX(-12deg); }
-  100% { transform: translateX(150%) skewX(-12deg); }
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0; /* شروع با مخفی بودن */
 }
 </style>
