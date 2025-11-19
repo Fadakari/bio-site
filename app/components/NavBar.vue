@@ -1,6 +1,6 @@
 <template>
   <header 
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out px-4 md:px-8"
+    class="fixed top-0 left-0 right-0 z-30 transition-all duration-300 ease-in-out px-4 md:px-8"
     :class="isScrolled ? 'py-3 bg-white/70 backdrop-blur-xl shadow-sm' : 'py-6 bg-transparent'"
   >
     <div class="max-w-7xl mx-auto flex items-center justify-between">
@@ -24,18 +24,15 @@
               @click="$emit('change', tab.id)"
               class="nav-btn relative px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ease-out outline-none border-none focus:outline-none focus:ring-0 overflow-hidden"
               :class="[
-                  // کلاس‌های پایه برای هر دو حالت
                   active === tab.id 
                       ? 'bg-slate-100 shadow-[inset_0_2px_6px_rgba(0,0,0,0.2)] transform scale-95' 
                       : 'text-slate-500 hover:text-slate-900',
 
-                  // مدیریت کلاس‌های هاور
                   active === tab.id 
-                      ? 'hover:bg-gray-700 hover:scale-110 hover:z-10 active:scale-85' // رنگ هاور برای دکمه فعال (اختیاری، چون سفید است)
-                      : 'hover:text-slate-700 hover:bg-gray-300 hover:scale-110 hover:z-10 active:scale-85' // رنگ هاور برای دکمه‌های غیرفعال
+                      ? 'hover:bg-gray-700 hover:scale-110 hover:z-10 active:scale-85'
+                      : 'hover:text-slate-700 hover:bg-gray-300 hover:scale-110 hover:z-10 active:scale-85'
               ]"
           >
-              <!-- این div سفید خودش پس‌زمینه دکمه فعال است -->
               <div v-if="active === tab.id" class="absolute inset-0 bg-white rounded-xl z-0" style="view-transition-name: active-tab;"></div>
 
               <span class="relative z-10 flex items-center gap-2">
@@ -124,7 +121,7 @@ const emit = defineEmits(['change']);
 const tabs = [
   { id: 'home', label: 'خانه', icon: '🏠' },
   { id: 'services', label: 'خدمات من', icon: '⚡' },
-  { id: 'blog', label: 'مقالات' },
+  { id: 'blog', label: 'مقالات', icon: '📝' },
   { id: 'contact', label: 'ارتباط', icon: '📞' }
 ];
 

@@ -31,7 +31,7 @@ const enterAnimation = (el, done) => {
     });
   } 
   
-  else if (currentTab.value === 'services' || currentTab.value === 'blog') {
+  else if (currentTab.value === 'services') {
     const cards = el.querySelectorAll('.service-card');
     
     cards.forEach(card => {
@@ -63,6 +63,36 @@ const enterAnimation = (el, done) => {
         }
       );
     });
+  }
+
+  else if (currentTab.value === 'blog') {
+    const cards = el.querySelectorAll('.article-card');
+    
+    // خاموش کردن موقت ترنزیشن برای جلوگیری از پرش
+    cards.forEach(card => {
+      card.style.transition = 'none';
+    });
+
+    gsap.fromTo(cards, 
+      { 
+        y: 100,        // حرکت از پایین به بالا
+        scale: 0.9,    // کمی کوچک‌تر در شروع
+        autoAlpha: 0   // شروع از نامرئی
+      },
+      { 
+        y: 0, 
+        scale: 1,
+        autoAlpha: 1, 
+        duration: 0.8, 
+        stagger: 0.15, // ظاهر شدن پله‌ای (آبشاری) کارت‌ها
+        ease: 'back.out(1.7)', // حالت فنری و جذاب
+        onComplete: () => {
+          // برگرداندن ترنزیشن برای کار کردن افکت‌های هاور
+          cards.forEach(card => card.style.transition = ''); 
+          done();
+        }
+      }
+    );
   }
   
   else {
