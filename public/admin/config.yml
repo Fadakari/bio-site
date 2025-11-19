@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "مقالات"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "عنوان مقاله", name: "title", widget: "string"}
+      - {label: "تاریخ انتشار", name: "date", widget: "datetime", format: "YYYY/MM/DD"}
+      - {label: "توضیحات کوتاه", name: "description", widget: "text"}
+      - {label: "دسته‌بندی", name: "category", widget: "select", options: ["تکنولوژی", "صنعت", "اخبار"]}
+      - {label: "تصویر شاخص", name: "image", widget: "image"}
+      - {label: "متن اصلی", name: "body", widget: "markdown"}

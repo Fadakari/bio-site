@@ -97,11 +97,9 @@
 <script setup>
 import { ref, nextTick } from 'vue';
 import { gsap } from 'gsap';
-import { queryContent } from '#imports';
 
-const { data: articles, error } = await useAsyncData('blog-list', () => 
-  queryContent()
-    .where({ _path: { $contains: '/blog' } })
+const { data: articles, pending, error } = await useAsyncData('blog-list', () => 
+  queryContent('blog')
     .sort({ date: -1 })
     .find()
 );
