@@ -3,4 +3,14 @@ body {
     padding: 0;
     box-sizing: border-box;
     direction: rtl;
+    font-family: 'MyCustomFont', sans-serif;
+}
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('../fonts/Vazir.ttf') format('truetype'),
+        url('../fonts/Vazir.woff') format('woff'),
+        url('../fonts/Vazir.woff2') format('woff2');
+}
+* {
+    font-family: 'MyCustomFont', sans-serif;
 }

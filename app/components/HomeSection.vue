@@ -15,6 +15,7 @@
       <span class="px-4 py-1 rounded-full bg-blue-50 text-blue-600 font-bold text-sm border border-blue-100">بنیان‌گذار استارتاپ</span>
       <span class="px-4 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-sm border border-slate-200">نویسنده</span>
     </div>
+    
 
     <p class="text-xl text-slate-500 max-w-2xl leading-relaxed">
       تلفیق قدرت ابزارآلات صنعتی با نوآوری دنیای دیجیتال. 

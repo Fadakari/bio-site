@@ -16,21 +16,32 @@
         </div>
       </div>
 
-      <div v-if="!isMobile" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div v-if="!isMobile" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 inset-shadow-sm">
         <div class="flex p-1.5 bg-slate-100/80 backdrop-blur-sm rounded-2xl border border-white/50 shadow-inner">
           <button 
-            v-for="tab in tabs" 
-            :key="tab.id"
-            @click="$emit('change', tab.id)"
-            class="relative px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ease-out outline-none border-none focus:outline-none focus:ring-0 overflow-hidden"
-            :class="active === tab.id ? 'text-slate-900 shadow-md shadow-slate-200 transform scale-100' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-200/50'"
+              v-for="tab in tabs" 
+              :key="tab.id"
+              @click="$emit('change', tab.id)"
+              class="nav-btn relative px-6 py-2.5 rounded-xl text-sm font-bold transition-all duration-300 ease-out outline-none border-none focus:outline-none focus:ring-0 overflow-hidden"
+              :class="[
+                  // کلاس‌های پایه برای هر دو حالت
+                  active === tab.id 
+                      ? 'bg-slate-100 shadow-[inset_0_2px_6px_rgba(0,0,0,0.2)] transform scale-95' 
+                      : 'text-slate-500 hover:text-slate-900',
+
+                  // مدیریت کلاس‌های هاور
+                  active === tab.id 
+                      ? 'hover:bg-gray-700 hover:scale-110 hover:z-10 active:scale-85' // رنگ هاور برای دکمه فعال (اختیاری، چون سفید است)
+                      : 'hover:text-slate-700 hover:bg-gray-300 hover:scale-110 hover:z-10 active:scale-85' // رنگ هاور برای دکمه‌های غیرفعال
+              ]"
           >
-            <div v-if="active === tab.id" class="absolute inset-0 bg-white rounded-xl z-0" style="view-transition-name: active-tab;"></div>
-            
-            <span class="relative z-10 flex items-center gap-2">
-              <span>{{ tab.icon }}</span>
-              {{ tab.label }}
-            </span>
+              <!-- این div سفید خودش پس‌زمینه دکمه فعال است -->
+              <div v-if="active === tab.id" class="absolute inset-0 bg-white rounded-xl z-0" style="view-transition-name: active-tab;"></div>
+
+              <span class="relative z-10 flex items-center gap-2">
+                  <span>{{ tab.icon }}</span>
+                  {{ tab.label }}
+              </span>
           </button>
         </div>
       </div>
@@ -57,7 +68,7 @@
 
     <Transition name="mobile-menu">
       <div v-if="isMobile && mobileMenuOpen" 
-           class="fixed inset-0 z-[100] bg-white flex flex-col"
+           class="fixed inset-0 z-[100] flex flex-col backdrop-blur-[15px]"
            @click.self="mobileMenuOpen = false">
         
         <div class="flex items-center justify-between p-6 border-b border-slate-100">
@@ -144,7 +155,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* انیمیشن ورود منوی موبایل */
 .mobile-menu-enter-active,
 .mobile-menu-leave-active {
   transition: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
@@ -156,11 +166,10 @@ onUnmounted(() => {
   transform: translateX(100%);
 }
 
-/* انیمیشن آیتم‌های موبایل */
 @keyframes slideInRight {
   0% {
     opacity: 0;
-    transform: translateX(50px); /* شروع از سمت راست */
+    transform: translateX(50px);
     filter: blur(5px);
   }
   100% {
@@ -174,7 +183,6 @@ onUnmounted(() => {
   animation: slideInRight 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-/* انیمیشن درخشش برای دکمه فعال (حس خفن بودن) */
 @keyframes shine {
   0% { transform: translateX(150%) skewX(-12deg); }
   100% { transform: translateX(-250%) skewX(-12deg); }
@@ -185,6 +193,11 @@ onUnmounted(() => {
 }
 .animate-fade-in-up {
   animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0; /* شروع با مخفی بودن */
+  opacity: 0;
+}
+.nav-btn {
+  cursor: pointer;
+} .nav-btn:hover {
+  
 }
 </style>
