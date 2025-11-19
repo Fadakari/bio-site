@@ -8,12 +8,14 @@ import AnimatedGradientBackground from './components/AnimatedGradientBackground.
 import HomeSection from './components/HomeSection.vue'; 
 import ServicesSection from './components/ServicesSection.vue';
 import ContactSection from './components/ContactSection.vue';
+import BlogSection from './components/BlogSection.vue';
 
 const currentTab = ref('home');
 
 const components = {
   home: HomeSection,
   services: ServicesSection,
+  blog: BlogSection,
   contact: ContactSection
 };
 
@@ -29,7 +31,7 @@ const enterAnimation = (el, done) => {
     });
   } 
   
-  else if (currentTab.value === 'services') {
+  else if (currentTab.value === 'services' || currentTab.value === 'blog') {
     const cards = el.querySelectorAll('.service-card');
     
     cards.forEach(card => {

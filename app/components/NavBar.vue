@@ -124,6 +124,7 @@ const emit = defineEmits(['change']);
 const tabs = [
   { id: 'home', label: 'خانه', icon: '🏠' },
   { id: 'services', label: 'خدمات من', icon: '⚡' },
+  { id: 'blog', label: 'مقالات' },
   { id: 'contact', label: 'ارتباط', icon: '📞' }
 ];
 
@@ -197,7 +198,5 @@ onUnmounted(() => {
 }
 .nav-btn {
   cursor: pointer;
-} .nav-btn:hover {
-  
 }
 </style>
