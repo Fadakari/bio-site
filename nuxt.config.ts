@@ -6,11 +6,9 @@ export default defineNuxtConfig({
   modules: ['@unocss/nuxt', '@nuxt/content'],
 
 
-  content: ( {
-    highlight: {
-      theme: 'github-light'
-    }
-  } as any ),
+  content: {
+    
+  },
 
   app: {
     head: {

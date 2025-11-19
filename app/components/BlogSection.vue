@@ -97,21 +97,27 @@
 <script setup>
 import { ref, nextTick } from 'vue';
 import { gsap } from 'gsap';
+import { queryContent } from '#imports';
 
-// --- دریافت مقالات از پوشه content/blog ---
-// queryContent('blog') -> تمام فایل‌های داخل پوشه blog را می‌خواند
-const { data: articles, pending } = await useAsyncData('blog', () => 
-  queryContent('blog').sort({ date: -1 }).find()
+const { data: articles, error } = await useAsyncData('blog-list', () => 
+  queryContent()
+    .where({ _path: { $contains: '/blog' } })
+    .sort({ date: -1 })
+    .find()
 );
+
+if (error.value) {
+  console.error('خطا در دریافت مقالات:', error.value);
+} else {
+  console.log('تعداد مقالات پیدا شده:', articles.value?.length || 0);
+  console.log('لیست مقالات:', articles.value);
+}
 
 const selectedArticle = ref(null);
 const articleRefs = ref([]);
 let activeRect = null;
 
 const openArticle = async (article, index) => {
-  // 1. یافتن المان کلیک شده در دام (DOM)
-  // چون لیست ما داینامیک است، باید المنت درست را پیدا کنیم
-  // articleRefs یک آرایه از تمام divها است
   const cardEl = articleRefs.value[index]; 
 
   if (!cardEl) return;
@@ -124,7 +130,6 @@ const openArticle = async (article, index) => {
   const detailCard = document.querySelector('.detail-card');
   const backdrop = document.querySelector('.detail-backdrop');
   
-  // انیمیشن FLIP
   gsap.fromTo(detailCard, 
     {
       position: 'fixed',
@@ -183,7 +188,6 @@ const closeArticle = () => {
 :global(body.modal-open) {
   overflow: hidden;
 }
-/* استایل برای المان‌های مارک‌داون اگر @tailwindcss/typography نصب نیست */
 :deep(h1), :deep(h2), :deep(h3) {
   margin-top: 1.5em;
   margin-bottom: 0.5em;

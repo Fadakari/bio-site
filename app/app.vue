@@ -20,6 +20,14 @@ const components = {
 };
 
 const enterAnimation = (el, done) => {
+  if (el) {
+       gsap.fromTo(el,
+        { x: 50, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', onComplete: done }
+      );
+    } else {
+      done();
+    }
   if (currentTab.value === 'home') {
     gsap.fromTo(el,
       { opacity: 0, scale: 0.9, filter: 'blur(10px)' },
@@ -68,26 +76,24 @@ const enterAnimation = (el, done) => {
   else if (currentTab.value === 'blog') {
     const cards = el.querySelectorAll('.article-card');
     
-    // خاموش کردن موقت ترنزیشن برای جلوگیری از پرش
     cards.forEach(card => {
       card.style.transition = 'none';
     });
 
     gsap.fromTo(cards, 
       { 
-        y: 100,        // حرکت از پایین به بالا
-        scale: 0.9,    // کمی کوچک‌تر در شروع
-        autoAlpha: 0   // شروع از نامرئی
+        y: 100,
+        scale: 0.9,
+        autoAlpha: 0
       },
       { 
         y: 0, 
         scale: 1,
         autoAlpha: 1, 
         duration: 0.8, 
-        stagger: 0.15, // ظاهر شدن پله‌ای (آبشاری) کارت‌ها
-        ease: 'back.out(1.7)', // حالت فنری و جذاب
+        stagger: 0.15,
+        ease: 'back.out(1.7)',
         onComplete: () => {
-          // برگرداندن ترنزیشن برای کار کردن افکت‌های هاور
           cards.forEach(card => card.style.transition = ''); 
           done();
         }
@@ -104,6 +110,11 @@ const enterAnimation = (el, done) => {
 };
 
 const leaveAnimation = (el, done) => {
+  if (!el) {
+    done();
+    return;
+  }
+  
   gsap.to(el, { 
     opacity: 0, 
     y: -20, 
