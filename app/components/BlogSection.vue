@@ -2,11 +2,11 @@
   <div class="w-full max-w-6xl mx-auto pt-10 px-4 pb-20 relative">
     
     <div class="text-center mb-12 transition-opacity duration-300" :class="{ 'opacity-0': selectedArticle }">
-      <h2 class="text-3xl font-black text-slate-900 mb-3">آخرین نوشته‌ها</h2>
-      <p class="text-slate-500">تجربیات و آموزش‌های تخصصی در حوزه صنعت و تکنولوژی</p>
+      <h2 class="text-3xl font-black text-slate-900 dark:text-slate-200 mb-3">آخرین نوشته‌ها</h2>
+      <p class="text-slate-500 dark:text-slate-300">تجربیات و آموزش‌های تخصصی در حوزه صنعت و تکنولوژی</p>
     </div>
 
-    <div v-if="pending" class="text-center text-slate-400 py-10">
+    <div v-if="pending" class="text-center text-slate-400 dark:text-slate-200 py-10">
       در حال بارگذاری مقالات...
     </div>
 
@@ -15,7 +15,7 @@
         v-for="(article, index) in articles" 
         :key="article._path"
         ref="articleRefs"
-        class="article-card group relative bg-white rounded-[2rem] p-3 shadow-xl shadow-slate-200/60 hover:shadow-2xl hover:shadow-slate-300/80 transition-all duration-500 cursor-pointer border border-white"
+        class="article-card group relative bg-white/50 dark:bg-dark/50 backdrop-blur-[10px] rounded-[2rem] p-3 hover:shadow-2xl hover:shadow-slate-300/80 transition-all duration-500 cursor-pointer border border-white"
         :class="{ 'opacity-0 pointer-events-none': selectedArticle && selectedArticle._path === article._path }"
         @click="openArticle(article, index)"
       >
@@ -28,10 +28,10 @@
         </div>
 
         <div class="px-2 pb-2">
-          <h3 class="text-xl font-black text-slate-800 mb-2 leading-tight group-hover:text-red-600 transition-colors line-clamp-2">
+          <h3 class="text-xl font-black text-slate-800 dark:text-slate-200 mb-2 leading-tight group-hover:text-red-600 transition-colors line-clamp-2">
             {{ article.title }}
           </h3>
-          <p class="text-slate-500 text-sm line-clamp-2 leading-relaxed">
+          <p class="text-slate-500 dark:text-slate-300 text-sm line-clamp-2 leading-relaxed">
             {{ article.description }}
           </p>
           <div class="mt-4 flex items-center justify-between border-t border-slate-100 pt-4">

@@ -17,6 +17,8 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@nuxtjs/robots": "^5.5.6",
+    "@nuxtjs/sitemap": "^7.4.7",
     "@unocss/nuxt": "^66.5.7",
     "gsap": "^3.13.0"
   }

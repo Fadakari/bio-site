@@ -9,11 +9,40 @@ import HomeSection from './components/HomeSection.vue';
 import ServicesSection from './components/ServicesSection.vue';
 import ContactSection from './components/ContactSection.vue';
 import BlogSection from './components/BlogSection.vue';
+import AboutSection from './components/AboutSection.vue';
+
+const isDark = ref(false);
+
+const { initTheme } = useTheme();
+
+onMounted(() => {
+  initTheme();
+});
+
+onMounted(() => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    isDark.value = true;
+    document.documentElement.classList.add('dark');
+  }
+});
+
+const toggleTheme = () => {
+  isDark.value = !isDark.value;
+  if (isDark.value) {
+    document.documentElement.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+  }
+};
 
 const currentTab = ref('home');
 
 const components = {
   home: HomeSection,
+  about: AboutSection,
   services: ServicesSection,
   blog: BlogSection,
   contact: ContactSection
@@ -71,6 +100,12 @@ const enterAnimation = (el, done) => {
         }
       );
     });
+  }
+  else if (currentTab.value === 'about') {
+    gsap.fromTo(el,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', onComplete: done }
+    );
   }
 
   else if (currentTab.value === 'blog') {
@@ -134,10 +169,25 @@ const leaveAnimation = (el, done) => {
     <NavBar :active="currentTab" @change="(id) => currentTab = id" />
 
     <main class="flex-grow flex flex-col items-center justify-center relative z-10 pt-24 pb-10 w-full">
-      <Transition mode="out-in" :css="false" @enter="enterAnimation" @leave="leaveAnimation">
+      <Transition :css="false" @enter="enterAnimation" @leave="leaveAnimation">
         <component :is="components[currentTab]" :key="currentTab" class="w-full flex flex-col items-center" />
       </Transition>
     </main>
 
   </div>
 </template>
+<style>
+:root {
+  --text-primary: #1e293b;
+}
+
+/* اضافه کردن استایل برای کل بادی در حالت دارک */
+:global(.dark) body {
+  background-color: #020617; /* همرنگ با پس‌زمینه انیمیشن */
+  color: #f1f5f9; /* سفید کردن متن‌ها */
+}
+
+:global(.dark) {
+  --text-primary: #f1f5f9;
+}
+</style>

@@ -1,78 +1,76 @@
 <template>
-  <div class="aurora-bg">
-    <div class="aurora-orb one"></div>
-    <div class="aurora-orb two"></div>
-    <div class="aurora-orb three"></div>
-    <div class="noise-overlay"></div>
+  <div class="fixed inset-0 w-full h-full -z-50 overflow-hidden pointer-events-none">
+    
+    <div class="absolute inset-0 bg-slate-50 dark:bg-dark-950 transition-colors duration-700 ease-in-out"></div>
+
+    <div class="blobs-container absolute inset-0 w-full h-full">
+      <div class="blob blob-1 bg-red-300 dark:bg-red-600/50"></div>
+      <div class="blob blob-2 bg-blue-300 dark:bg-blue-600/50"></div>
+      <div class="blob blob-3 bg-purple-300 dark:bg-purple-600/50"></div>
+      <div class="blob blob-4 bg-yellow-300 dark:bg-teal-600/50"></div>
+      <div class="blob blob-5 bg-pink-300 dark:bg-pink-600/50"></div>
+    </div>
+
+    <div class="absolute inset-0 opacity-20 mix-blend-soft-light pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
   </div>
 </template>
 
+<script setup>
+import { onMounted, onUnmounted } from 'vue';
+import { gsap } from 'gsap';
+
+let ctx;
+
+onMounted(() => {
+  ctx = gsap.context(() => {
+    const blobs = gsap.utils.toArray(".blob");
+
+    // تنظیمات اولیه و انیمیشن حرکت
+    blobs.forEach((blob) => {
+      gsap.set(blob, {
+        xPercent: -100, 
+        yPercent: -100,
+        x: gsap.utils.random(-1000, 500),
+        y: gsap.utils.random(200, window.innerHeight),
+        scale: gsap.utils.random(0.8, 1.5),
+        opacity: 0.8 
+      });
+
+      function animateBlob() {
+        gsap.to(blob, {
+          duration: gsap.utils.random(1, 2), // حرکت خیلی نرم
+          x: gsap.utils.random(-1000, 500),
+          y: gsap.utils.random(200, window.innerHeight),
+          rotation: gsap.utils.random(-180, 180),
+          scale: gsap.utils.random(0.8, 1.8),
+          ease: "sine.inOut",
+          onComplete: animateBlob
+        });
+      }
+      animateBlob();
+    });
+  });
+});
+
+onUnmounted(() => {
+  if (ctx) ctx.revert();
+});
+</script>
+
 <style scoped>
-.aurora-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-color: #ffffff;
-  overflow: hidden;
+/* فقط استایل‌های ضروری برای سایز و بلور */
+.blobs-container {
+  filter: blur(80px); /* بلور شدید برای ادغام رنگ‌ها */
 }
 
-.aurora-orb {
+.blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
-  animation: float infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-  mix-blend-mode: multiply;
-}
-
-.one {
-  top: -10%;
-  left: -10%;
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, rgba(220, 38, 38, 0.911) 0%, rgba(255, 255, 255, 0) 70%);
-  animation-duration: 1s;
-  animation-name: float-1;
-}
-
-.two {
-  top: 20%;
-  right: -20%;
-  width: 60vw;
-  height: 60vw;
-  background: radial-gradient(circle, rgba(59, 131, 246, 0.918) 0%, rgba(255, 255, 255, 0) 70%);
-  animation-duration: 1s;
-  animation-name: float-2;
-}
-
-.three {
-  bottom: -20%;
-  left: 20%;
-  width: 80vw;
-  height: 80vw;
-  background: radial-gradient(circle, rgba(79, 89, 104, 0.863) 0%, rgba(255, 255, 255, 0) 70%);
-  animation-duration: 1s;
-  animation-name: float-3;
-}
-
-.noise-overlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  pointer-events: none;
-}
-
-@keyframes float-1 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(10%, 5%) scale(1.1); }
-}
-@keyframes float-2 {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-10%, 10%) scale(0.9); }
-}
-@keyframes float-3 {
-  0% { transform: translate(0, 0) rotate(0deg); }
-  100% { transform: translate(5%, -5%) rotate(5deg); }
+  /* سایز توپ‌ها */
+  width: 25vw; 
+  height: 25vw;
+  min-width: 300px; /* حداقل سایز برای موبایل */
+  min-height: 300px;
+  transition: background-color 0.7s ease; /* تغییر رنگ نرم هنگام تغییر تم */
 }
 </style>

@@ -7,17 +7,17 @@
     </div>
 
     <h1 class="text-5xl md:text-8xl font-black text-slate-900 mb-4 tracking-tight">
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-900">بهزاد حیدری</span>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-slate-900 dark:from-slate-50 dark:to-rose-700">بهزاد حیدری</span>
     </h1>
     
     <div class="flex flex-wrap justify-center gap-3 mb-8">
-      <span class="px-4 py-1 rounded-full bg-red-50 text-red-600 font-bold text-sm border border-red-100">نمایندگی هیلتی</span>
-      <span class="px-4 py-1 rounded-full bg-blue-50 text-blue-600 font-bold text-sm border border-blue-100">بنیان‌گذار استارتاپ</span>
-      <span class="px-4 py-1 rounded-full bg-slate-100 text-slate-600 font-bold text-sm border border-slate-200">نویسنده</span>
+      <span class="px-4 py-1 rounded-full bg-red-50 text-red-600 dark:backdrop-blur-sm dark:bg-white/20 dark:text-red-500 font-bold text-sm border border-red-100">نمایندگی هیلتی</span>
+      <span class="px-4 py-1 rounded-full bg-blue-50 text-blue-600 dark:backdrop-blur-sm dark:bg-white/20 dark:text-sky-400 font-bold text-sm border border-blue-100">بنیان‌گذار استارتاپ</span>
+      <span class="px-4 py-1 rounded-full bg-slate-100 text-slate-600 dark:backdrop-blur-sm dark:bg-white/20 dark:text-slate-100 font-bold text-sm border border-slate-200">نویسنده</span>
     </div>
     
 
-    <p class="text-xl text-slate-500 max-w-2xl leading-relaxed">
+    <p class="text-xl text-slate-500 dark:text-slate-300 max-w-2xl leading-relaxed">
       تلفیق قدرت ابزارآلات صنعتی با نوآوری دنیای دیجیتال. 
       <br>ما اینجا هستیم تا استانداردهای جدیدی تعریف کنیم.
     </p>
