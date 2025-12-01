@@ -25,6 +25,30 @@ onMounted(() => {
     isDark.value = true;
     document.documentElement.classList.add('dark');
   }
+
+
+  console.log(
+    '%c Developed by %c Erfan Fadakar %c 🚀 ',
+    'background: #333; color: #fff; padding: 5px; border-radius: 3px 0 0 3px;',
+    'background: #ef4444; color: #fff; padding: 5px; font-weight: bold;',
+    'background: #333; color: #fff; padding: 5px; border-radius: 0 3px 3px 0;'
+  );
+  console.log('Need a website like this? Contact me at: 09910689541, in Telegram or Whatsapp');
+
+  let secretCode = 'fadakar';
+  let inputSequence = '';
+  
+  window.addEventListener('keydown', (e) => {
+    inputSequence += e.key.toLowerCase();
+    
+    if (inputSequence.length > secretCode.length) {
+      inputSequence = inputSequence.slice(-secretCode.length);
+    }
+
+    if (inputSequence === secretCode) {
+      alert('این وبسایت با افتخار توسط سید عرفان حسینی فداکاری طراحی و توسعه داده شده است. \nتکنولوژی‌ها: Nuxt 3, GSAP, Tailwind');
+    }
+  });
 });
 
 const toggleTheme = () => {
@@ -48,117 +72,9 @@ const components = {
   contact: ContactSection
 };
 
-const enterAnimation = (el, done) => {
-  if (el) {
-       gsap.fromTo(el,
-        { x: 50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', onComplete: done }
-      );
-    } else {
-      done();
-    }
-  if (currentTab.value === 'home') {
-    gsap.fromTo(el,
-      { opacity: 0, scale: 0.9, filter: 'blur(10px)' },
-      { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.8, ease: 'power3.out', onComplete: done }
-    );
-    
-    gsap.from(el.querySelectorAll('h1, p, .group'), {
-      y: 50, opacity: 0, stagger: 0.1, duration: 0.8, delay: 0.2, ease: 'back.out(1.7)'
-    });
-  } 
-  
-  else if (currentTab.value === 'services') {
-    const cards = el.querySelectorAll('.service-card');
-    
-    cards.forEach(card => {
-      card.style.transition = 'none';
-    });
 
-    cards.forEach((card, index) => {
-      const startX = index % 2 === 0 ? -100 : 100;
 
-      gsap.fromTo(card, 
-        { 
-          x: startX, 
-          y: 50, 
-          autoAlpha: 0,
-          rotation: index % 2 === 0 ? -5 : 5 
-        },
-        { 
-          x: 0, 
-          y: 0, 
-          autoAlpha: 1, 
-          rotation: 0,
-          duration: 0.8, 
-          delay: index * 0.15,
-          ease: 'back.out(1.2)',
-          onComplete: () => {
-            card.style.transition = ''; 
-            if (index === cards.length - 1) done();
-          }
-        }
-      );
-    });
-  }
-  else if (currentTab.value === 'about') {
-    gsap.fromTo(el,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', onComplete: done }
-    );
-  }
 
-  else if (currentTab.value === 'blog') {
-    const cards = el.querySelectorAll('.article-card');
-    
-    cards.forEach(card => {
-      card.style.transition = 'none';
-    });
-
-    gsap.fromTo(cards, 
-      { 
-        y: 100,
-        scale: 0.9,
-        autoAlpha: 0
-      },
-      { 
-        y: 0, 
-        scale: 1,
-        autoAlpha: 1, 
-        duration: 0.8, 
-        stagger: 0.15,
-        ease: 'back.out(1.7)',
-        onComplete: () => {
-          cards.forEach(card => card.style.transition = ''); 
-          done();
-        }
-      }
-    );
-  }
-  
-  else {
-    gsap.fromTo(el,
-      { x: 50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out', onComplete: done }
-    );
-  }
-};
-
-const leaveAnimation = (el, done) => {
-  if (!el) {
-    done();
-    return;
-  }
-  
-  gsap.to(el, { 
-    opacity: 0, 
-    y: -20, 
-    filter: 'blur(5px)', 
-    duration: 0.3, 
-    ease: 'power1.in', 
-    onComplete: done 
-  });
-};
 </script>
 
 <template>
@@ -166,12 +82,10 @@ const leaveAnimation = (el, done) => {
     
     <AnimatedGradientBackground />
     
-    <NavBar :active="currentTab" @change="(id) => currentTab = id" />
+    <NavBar />
 
     <main class="flex-grow flex flex-col items-center justify-center relative z-10 pt-24 pb-10 w-full">
-      <Transition :css="false" @enter="enterAnimation" @leave="leaveAnimation">
-        <component :is="components[currentTab]" :key="currentTab" class="w-full flex flex-col items-center" />
-      </Transition>
+      <NuxtPage />
     </main>
 
   </div>
@@ -181,10 +95,18 @@ const leaveAnimation = (el, done) => {
   --text-primary: #1e293b;
 }
 
-/* اضافه کردن استایل برای کل بادی در حالت دارک */
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 :global(.dark) body {
-  background-color: #020617; /* همرنگ با پس‌زمینه انیمیشن */
-  color: #f1f5f9; /* سفید کردن متن‌ها */
+  background-color: #020617;
+  color: #f1f5f9;
 }
 
 :global(.dark) {

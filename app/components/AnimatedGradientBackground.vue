@@ -25,7 +25,6 @@ onMounted(() => {
   ctx = gsap.context(() => {
     const blobs = gsap.utils.toArray(".blob");
 
-    // تنظیمات اولیه و انیمیشن حرکت
     blobs.forEach((blob) => {
       gsap.set(blob, {
         xPercent: -100, 
@@ -38,7 +37,7 @@ onMounted(() => {
 
       function animateBlob() {
         gsap.to(blob, {
-          duration: gsap.utils.random(1, 2), // حرکت خیلی نرم
+          duration: gsap.utils.random(2, 5), 
           x: gsap.utils.random(-1000, 500),
           y: gsap.utils.random(200, window.innerHeight),
           rotation: gsap.utils.random(-180, 180),
@@ -58,19 +57,21 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* فقط استایل‌های ضروری برای سایز و بلور */
 .blobs-container {
-  filter: blur(80px); /* بلور شدید برای ادغام رنگ‌ها */
+  filter: blur(80px);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 .blob {
   position: absolute;
   border-radius: 50%;
-  /* سایز توپ‌ها */
   width: 25vw; 
   height: 25vw;
-  min-width: 300px; /* حداقل سایز برای موبایل */
+  min-width: 300px;
   min-height: 300px;
-  transition: background-color 0.7s ease; /* تغییر رنگ نرم هنگام تغییر تم */
+  transition: background-color 2s ease;
+  will-change: transform;
 }
 </style>

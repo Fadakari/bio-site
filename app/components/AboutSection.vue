@@ -16,7 +16,7 @@
         
         <div class="bg-white/50 dark:backdrop-blur-[10px] rounded-[2.5rem] p-2 shadow-2xl shadow-slate-200/50 border border-slate-100 relative overflow-hidden group">
           <div class="relative rounded-[2rem] overflow-hidden aspect-[3/4]">
-            <img src="/me.jpg" alt="بهزاد حیدری" itemprop="image" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+            <NuxtImg src="/me.jpg" alt="بهزاد حیدری" itemprop="image" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent"></div>
             <div class="absolute bottom-0 left-0 p-6 text-white">
               <h3 class="font-black text-2xl mb-1">بهزاد حیدری</h3>
@@ -56,8 +56,8 @@
               <span class="font-bold text-slate-800" dir="ltr">09122719204</span>
             </div>
              <div class="flex justify-between p-4 bg-slate-50/10 dark:backdrop-blur-[10px] hover:bg-slate-50/50 transition-colors">
-              <span class="text-slate-500 dark:text-slate-300">وبسایت تعمیرات ما:</span>
-              <a href="https://tamirat-takhasosi-heydari.ir" target="_blank" class="font-bold text-red-600 hover:underline" itemprop="url">تعمیرات تخصصی</a>
+              <span class="text-slate-500 dark:text-slate-300">درخواست تعمیرات:</span>
+              <a href="https://tamirat-takhasosi-heydari.ir/%d9%81%d8%b1%d9%85-%d8%af%d8%b1%d8%ae%d9%88%d8%a7%d8%b3%d8%aa-%d8%aa%d8%b9%d9%85%db%8c%d8%b1%d8%a7%d8%aa/" target="_blank" class="font-bold text-red-600 hover:underline" itemprop="url">فرم  درخواست تعمیرات</a>
             </div>
 
             <div class="p-4 bg-slate-100/50 dark:bg-white/5">
@@ -66,12 +66,12 @@
               <div class="flex items-center justify-between gap-2">
 
                 <a href="https://cafebazaar.ir/app/com.example.stockdivarapp" target="_blank" class="group relative flex-1 h-12 rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800/50 flex items-center justify-center text-green-600 dark:text-green-400 hover:bg-green-600 hover:text-white dark:hover:bg-green-600 dark:hover:text-white transition-all duration-300" title="دانلود از بازار">
-                   <img src="/Cafebazaar-Logo.svg" alt="" class="p-3">
+                   <NuxtImg src="/Cafebazaar-Logo.svg" alt="" class="p-3" />
                    <span class="absolute -top-8 px-2 py-1 bg-slate-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">بازار</span>
                 </a>
                 
                 <a href="https://myket.ir/app/com.example.stockdivarapp" target="_blank" class="group relative flex-1 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50 flex items-center justify-center text-blue-600 dark:text-blue-400 hover:bg-sky-300 hover:text-white dark:hover:bg-sky-300 dark:hover:text-white transition-all duration-300" title="دانلود از مایکت">
-                   <img src="/Myket-Logo-farsi.svg" alt="" class="p-3">
+                   <NuxtImg src="/Myket-Logo-farsi.svg" alt="" class="p-3" />
                    <span class="absolute -top-8 px-2 py-1 bg-slate-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">مایکت</span>
                 </a>
 
@@ -130,7 +130,7 @@
           <div ref="fullCarousel" class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 hide-scrollbar scroll-smooth">
   
               <div class="w-full flex-shrink-0 h-64 md:h-96 rounded-[2rem] snap-center relative overflow-hidden group">
-                  <img src="/ourpicture.jpg" alt="عنوان عکس" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                  <NuxtImg src="/ourpicture.jpg" alt="عنوان عکس" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
 
                   <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-8">
                     <div class="text-white">
@@ -141,7 +141,7 @@
               </div>
           
               <div class="w-full flex-shrink-0 h-64 md:h-96 rounded-[2rem] snap-center relative overflow-hidden group">
-                  <img src="/me.jpg" alt="نویسنده" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                  <NuxtImg src="/me.jpg" alt="نویسنده" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent flex items-end p-8">
                     <div class="text-white">
                       <h4 class="text-2xl font-black mb-2">نویسنده کتب تخصصی</h4>
@@ -196,11 +196,8 @@ const scrollCarousel = (type, direction) => {
   const container = type === 'full' ? fullCarousel.value : smallCarousel.value;
   if (!container) return;
   
-  // عرض کانتینر را می‌گیریم
   const containerWidth = container.offsetWidth;
   
-  // برای کاروسل کوچک (۳ تایی)، هر اسکرول باید حدود یک سوم عرض باشد
-  // برای کاروسل بزرگ، کل عرض
   const scrollAmount = type === 'full' ? containerWidth : (containerWidth / 3);
 
   container.scrollBy({
@@ -221,7 +218,7 @@ const scrollCarousel = (type, direction) => {
 
 .animate-fade-in-up {
   animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0; /* Start hidden */
+  opacity: 0;
 }
 
 @keyframes fadeInUp {

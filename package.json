@@ -17,9 +17,11 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@nuxt/image": "^2.0.0",
     "@nuxtjs/robots": "^5.5.6",
     "@nuxtjs/sitemap": "^7.4.7",
     "@unocss/nuxt": "^66.5.7",
-    "gsap": "^3.13.0"
+    "gsap": "^3.13.0",
+    "nuxt-schema-org": "^5.0.9"
   }
 }

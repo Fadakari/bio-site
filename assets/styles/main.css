@@ -13,19 +13,15 @@ body {
         url('../fonts/Vazir.woff2') format('woff2');
 }
 
-/* src/assets/styles/main.css */
 
 :root {
-  /* رنگ پس‌زمینه در حالت لایت (روشن) - مثلا خاکستری خیلی روشن */
   --bg-color: #f8fafc; 
   --text-color: #1e293b;
   --primary-color: #38bdf8;
 }
 
-/* وقتی کلاس دارک به html اضافه شود، این متغیرها فعال می‌شوند */
 :global(.dark) {
   :root {
-    /* رنگ پس‌زمینه در حالت دارک (تیره) - سرمه‌ای خیلی تیره */
     --bg-color: #020617; 
     --text-color: #f1f5f9;
   }
@@ -41,16 +37,15 @@ body {
 html, body {
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden; /* جلوگیری از اسکرول افقی */
+  overflow-x: hidden;
 }
 
 body {
-  /* استفاده از متغیرهای تعریف شده در بالا */
   background-color: var(--bg-color);
   color: var(--text-color);
   font-family: 'Vazirmatn', sans-serif;
   line-height: 1.6;
-  transition: background-color 0.3s ease, color 0.3s ease; /* تغییر نرم بین لایت و دارک */
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 html {

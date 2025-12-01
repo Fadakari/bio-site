@@ -2,17 +2,48 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
-  // اضافه شدن ماژول content
+  image: {
+    quality: 80,
+    format: ['webp'],
+    screens: {
+      'xs': 320,
+      'sm': 640,
+      'md': 768,
+      'lg': 1024,
+      'xl': 1280,
+      'xxl': 1536,
+      '2xl': 1536
+    },
+  },
+
+  nitro: {
+    compressPublicAssets: true,
+  },
+
   modules: [
     '@unocss/nuxt',
     '@nuxt/content',
     '@nuxtjs/sitemap',
-    '@nuxtjs/robots'
+    '@nuxtjs/robots',
+    'nuxt-schema-org',
+    '@nuxt/image'
   ],
 
   site: {
     url: 'https://behzadheydari.ir',
-    name: 'بهزاد حیدری | کارآفرین و متخصص ابزارآلات صنعتی',
+    name: 'بهزاد حیدری',
+    description: 'وبسایت رسمی بهزاد حیدری، کارآفرین نمونه، نویسنده و متخصص ابزارآلات صنعتی',
+    defaultLocale: 'fa', 
+    indexable: true,
+  },
+
+  schemaOrg: {
+    identity: {
+      type: 'Person',
+      name: 'بهزاد حیدری',
+      image: '/me.jpg',
+      url: 'https://behzadheydari.ir'
+    }
   },
 
   content: {
@@ -22,14 +53,20 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'fa', dir: 'rtl' },
-      title: 'Behzad Heydari | Industrial & Tech Portfolio',
+      titleTemplate: '%s | بهزاد حیدری',
+      title: 'بهزاد حیدری | کارآفرین و متخصص ابزارآلات صنعتی',
       meta: [
-        { name: 'description', content: 'نمایندگی هیلتی، نویسنده و بنیان‌گذار استارتاپ' },
+        { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#ffffff' }
+        { name: 'author', content: 'بهزاد حیدری' },
+        { name: 'theme-color', content: '#ffffff' },
+        { property: 'og:site_name', content: 'بهزاد حیدری' },
+        { property: 'og:locale', content: 'fa_IR' },
+        { property: 'og:type', content: 'profile' },
       ],
       link: [
-        { rel: 'preload', href: 'assets/fonts/Vazir.woff2', as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'canonical', href: 'https://behzadheydari.ir' }
       ]
     }
   }
