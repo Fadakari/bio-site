@@ -22,6 +22,7 @@ import { gsap } from 'gsap';
 let ctx;
 
 onMounted(() => {
+  if (window.innerWidth < 768) return;
   ctx = gsap.context(() => {
     const blobs = gsap.utils.toArray(".blob");
 
@@ -74,4 +75,5 @@ onUnmounted(() => {
   transition: background-color 2s ease;
   will-change: transform;
 }
+
 </style>
